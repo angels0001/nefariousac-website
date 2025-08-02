@@ -1,282 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NefariousAC Minecraft Solutions</title>
   <style>
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.05; }
-      50% { opacity: 0.25; }
-    }
-
-    @keyframes sparkleFly {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0);
-      }
-    }
-
+    /* Blur intro animation */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #0b0c2a, #1a1b40, #301934, #0b0c2a);
+      background: linear-gradient(-45deg, #0b0c1a, #1a0b3d, #0b1a33, #191970);
       background-size: 400% 400%;
-      animation: gradientMove 20s ease infinite;
+      animation: gradientBG 15s ease infinite, blurToClear 5s ease forwards;
       min-height: 100vh;
-      color: #e0e0ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       position: relative;
-      overflow-x: hidden;
+      padding-bottom: 20px; /* reduced from 80 */
+      color: #a64ca6; /* neon purple text */
+      text-shadow:
+        0 0 5px #a64ca6,
+        0 0 10px #a64ca6,
+        0 0 20px #c27aff,
+        0 0 30px #a64ca6;
+      filter: blur(12px);
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: 
-        radial-gradient(rgba(255, 255, 150, 0.6) 1.5px, transparent 1.5px),
-        radial-gradient(rgba(255, 255, 150, 0.4) 1.5px, transparent 1.5px);
-      background-size: 120px 120px;
-      background-position: 0 0, 60px 60px;
-      animation: twinkle 6s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
+    @keyframes blurToClear {
+      from {
+        filter: blur(12px);
+      }
+      to {
+        filter: blur(0);
+      }
+    }
+
+    @keyframes gradientBG {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
     }
 
     header {
-      background: linear-gradient(to top left, #1a1a3c, #2e0854, #1a1a3c);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
-      border: 2px solid black;
-      padding: 40px 20px;
+      background: linear-gradient(to top left, #0b0b1f, #1a0b3d);
+      border-bottom: 3px solid #a64ca6; /* neon purple underline */
+      padding: 15px 20px 10px; /* reduced */
       text-align: center;
-      width: 100%;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 1;
-      animation: fadeIn 1.2s ease forwards;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #c27aff;
+      box-shadow: 0 2px 8px rgba(166, 76, 166, 0.5);
     }
 
-    h1 {
+    header h1 {
       margin: 0;
-      font-size: 3rem;
-      background: linear-gradient(90deg, #4b0082, #8a2be2, #191970);
-      background-size: 200% auto;
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-      animation: gradientMove 10s linear infinite;
-      text-shadow: 0 0 6px rgba(138, 43, 226, 0.6);
+      font-weight: 700;
+      font-size: 2.8rem;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 6px #a64ca6aa; /* subtle glow */
+    }
+
+    header .tagline {
+      margin-top: 8px;
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: #d1aaffcc;
+      letter-spacing: 1px;
+      font-style: italic;
+      text-shadow: none;
     }
 
     nav {
       display: flex;
-      gap: 20px;
       justify-content: center;
-      padding: 15px;
-      background-color: rgba(0, 0, 0, 0.5);
-      width: 100%;
-      z-index: 1;
-      animation: fadeIn 1.4s ease forwards;
-      position: relative;
+      margin: 10px 0; /* reduced */
+      gap: 25px;
     }
 
-    nav a {
-      position: relative;
-      text-decoration: none;
-      color: #ccc;
-      font-size: 1.1rem;
-      padding: 8px 16px;
+    nav button {
+      background: transparent;
+      color: #a64ca6;
+      border: 2px solid #a64ca6; /* neon purple */
       border-radius: 6px;
-      border: 2px solid #8a2be2; /* Neon purple border */
-      box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
-      background-color: rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      overflow: visible;
-    }
-
-    nav a:hover {
-      color: #fff;
-      background: linear-gradient(to right, #4b0082, #8a2be2);
-      box-shadow: 0 0 16px #8a2be2, 0 0 8px #8a2be2;
-    }
-
-    main {
-      padding: 40px 20px;
-      max-width: 800px;
-      text-align: center;
-      z-index: 1;
-      animation: fadeIn 1.6s ease forwards;
-    }
-
-    p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: #ccc;
-    }
-
-    .icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      padding: 30px 0;
-    }
-
-    .icons img {
-      width: 64px;
-      transition: transform 0.3s ease, filter 0.3s ease;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.2));
+      padding: 10px 22px;
+      font-size: 1rem;
       cursor: pointer;
       position: relative;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow:
+        0 0 8px #a64ca6,
+        0 0 10px #c27aff,
+        0 0 15px #a64ca6;
+      user-select: none;
       overflow: visible;
+      text-shadow:
+        0 0 5px #a64ca6,
+        0 0 10px #c27aff;
     }
 
-    .icons img:hover {
-      transform: scale(1.2);
-      filter: drop-shadow(0 0 12px #8a2be2);
+    nav button:hover {
+      background-color: #330033;
+      box-shadow:
+        0 0 15px #eec300,
+        0 0 20px #a64ca6,
+        0 0 30px #c27aff;
+      color: #eec300;
+      text-shadow:
+        0 0 10px #eec300,
+        0 0 15px #a64ca6,
+        0 0 20px #c27aff;
     }
 
     footer {
-      text-align: center;
-      padding: 25px 20px;
-      background-color: #111;
-      color: #aaa;
-      font-size: 0.9rem;
-      border-top: 1px solid #333;
-      width: 100%;
-      z-index: 1;
-      animation: fadeIn 1.8s ease forwards;
-    }
-
-    /* Bottom-left Community Button */
-    .community-btn {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: linear-gradient(to right, #4b0082, #8a2be2);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
+      bottom: 0;
+      width: 100%;
+      padding: 10px 0; /* reduced */
+      background: linear-gradient(to top, #000022, #220044);
+      text-align: center;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      user-select: none;
+      color: #a64ca6;
+      text-shadow:
+        0 0 5px #a64ca6,
+        0 0 10px #c27aff;
+      z-index: 10;
+    }
+
+    #community-btn {
+      position: fixed;
+      bottom: 50px; /* moved above footer */
+      left: 16px;
+      background: transparent;
+      color: #a64ca6;
+      border: 2px solid #a64ca6; /* neon purple */
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
       cursor: pointer;
-      box-shadow: 0 0 10px #8a2be2;
-      z-index: 2;
-      transition: all 0.3s ease;
-      animation: fadeIn 2s ease forwards;
-      overflow: visible;
+      box-shadow:
+        0 0 8px #a64ca6,
+        0 0 12px #c27aff;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      z-index: 20;
+      text-shadow:
+        0 0 5px #a64ca6,
+        0 0 10px #c27aff;
+    }
+
+    #community-btn:hover {
+      background-color: #330033;
+      box-shadow:
+        0 0 12px #eec300,
+        0 0 20px #eec300,
+        0 0 25px #c27aff;
+      color: #eec300;
+      text-shadow:
+        0 0 10px #eec300,
+        0 0 15px #c27aff;
+    }
+
+    .button-container {
       position: relative;
+      display: inline-block;
     }
 
-    .community-btn:hover {
-      background: linear-gradient(to right, #8a2be2, #4b0082);
-      box-shadow: 0 0 15px #8a2be2;
-    }
-
-    /* Sparkle style */
     .sparkle {
       position: absolute;
-      width: 6px;
-      height: 6px;
-      background: radial-gradient(circle at center, #ffffaa, #ffaa00);
+      background: radial-gradient(circle, #ffee88 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
-      opacity: 1;
-      filter: drop-shadow(0 0 6px #ffea5f);
-      animation: sparkleFly 0.8s forwards ease-out;
-      z-index: 1000;
+      animation: twinkleMove 0.7s forwards ease-out;
+    }
+
+    @keyframes twinkleMove {
+      from {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.1);
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>NefariousAC Minecraft Solutions</h1>
+    <p class="tagline">Reliable Minecraft Security & Support</p>
   </header>
 
   <nav>
-    <a href="#" class="sparkle-trigger">Home</a>
-    <a href="#" class="sparkle-trigger">Purchase</a>
-    <a href="#" class="sparkle-trigger">NfAc</a>
-    <a href="#" class="sparkle-trigger">Support</a>
+    <div class="button-container"><button>Home</button></div>
+    <div class="button-container"><button>Purchase</button></div>
+    <div class="button-container"><button>NEF-AC</button></div>
+    <div class="button-container"><button>Support</button></div>
   </nav>
-
-  <main>
-    <p>Welcome to your go-to resource for expert Minecraft command blocks, redstone automation, and optimized survival or creative builds — all with a nefarious twist.</p>
-
-    <div class="icons">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/9/99/Command_Block_JE3_BE2.png" alt="Command Block" class="sparkle-trigger">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/5f/Redstone_Dust_JE2_BE2.png" alt="Redstone Dust" class="sparkle-trigger">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/03/Ender_Pearl_JE2_BE2.png" alt="Ender Pearl" class="sparkle-trigger">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/dd/Diamond_Sword_JE3_BE2.png" alt="Diamond Sword" class="sparkle-trigger">
-    </div>
-  </main>
 
   <footer>
     &copy; 2025 NefariousAC Minecraft Solutions. All rights reserved.
   </footer>
 
-  <!-- Bottom-left Community Button -->
-  <button class="community-btn sparkle-trigger">Community</button>
+  <button id="community-btn">Community</button>
 
   <script>
-    // Function to create sparkles flying off element
-    function createSparkles(elem, count = 8) {
-      const rect = elem.getBoundingClientRect();
-      const sparkleContainer = document.createElement('div');
-      sparkleContainer.style.position = 'absolute';
-      sparkleContainer.style.left = `${rect.left + window.scrollX}px`;
-      sparkleContainer.style.top = `${rect.top + window.scrollY}px`;
-      sparkleContainer.style.width = `${rect.width}px`;
-      sparkleContainer.style.height = `${rect.height}px`;
-      sparkleContainer.style.pointerEvents = 'none';
-      sparkleContainer.style.overflow = 'visible';
-      sparkleContainer.style.zIndex = '1000';
-      document.body.appendChild(sparkleContainer);
+    // Sparkle fly-off effect on hover for nav buttons and community button
+    const buttons = document.querySelectorAll("nav button, #community-btn");
 
-      for(let i = 0; i < count; i++) {
-        const sparkle = document.createElement('span');
-        sparkle.classList.add('sparkle');
+    buttons.forEach(button => {
+      button.addEventListener("mouseenter", () => {
+        createSparkles(button);
+      });
+    });
 
-        // Position sparkle randomly inside the element
-        sparkle.style.left = `${Math.random() * rect.width}px`;
-        sparkle.style.top = `${Math.random() * rect.height}px`;
-
-        // Set random fly direction & distance using CSS variables for animation
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = 60 + Math.random() * 40; // px
-        const x = Math.cos(angle) * distance + 'px';
-        const y = Math.sin(angle) * distance + 'px';
-        sparkle.style.setProperty('--x', x);
-        sparkle.style.setProperty('--y', y);
-
-        sparkleContainer.appendChild(sparkle);
-
-        // Remove sparkle after animation
-        sparkle.addEventListener('animationend', () => sparkle.remove());
+    function createSparkles(button) {
+      const rect = button.getBoundingClientRect();
+      const container = button.parentElement;
+      if (!container.classList.contains('button-container')) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('button-container');
+        button.parentElement.replaceChild(wrapper, button);
+        wrapper.appendChild(button);
       }
 
-      // Remove container after animation duration (plus a buffer)
-      setTimeout(() => sparkleContainer.remove(), 
+      for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.classList.add("sparkle");
+
+        const x = Math.random() * button.offsetWidth;
+        const y = Math.random() * button.offsetHeight;
+
+        const tx = (Math.random() - 0.5) * 150 + "px";
+        const ty = (Math.random() - 0.5) * 150 + "px";
+
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+        sparkle.style.width = "8px";
+        sparkle.style.height = "8px";
+        sparkle.style.setProperty('--tx', tx);
+        sparkle.style.setProperty('--ty', ty);
+
+        button.parentElement.appendChild(sparkle);
+
+        sparkle.addEventListener("animationend", () => {
+          sparkle.remove();
+        });
+      }
+    }
+  </script>
+</body>
+</html>

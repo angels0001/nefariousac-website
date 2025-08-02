@@ -32,7 +32,11 @@
       z-index: -1;
     }
 
-    @keyframes blurToClear { from { filter: blur(12px); } to { filter: blur(0); } }
+    @keyframes blurToClear {
+      from { filter: blur(12px); }
+      to { filter: blur(0); }
+    }
+
     @keyframes gradientBG {
       0% {background-position:0% 50%;}
       50% {background-position:100% 50%;}
@@ -160,12 +164,35 @@
       from { opacity: 1; transform: translate(0, 0) scale(1); }
       to { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.1); }
     }
+
+    /* Centered Moon Icon */
+    #moon-icon {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      z-index: 101;
+      opacity: 0;
+      animation: fadeInAndOutMoon 5s ease-out forwards;
+      text-shadow: 0 0 10px #fff088, 0 0 20px #fff088, 0 0 30px #ffdd88;
+    }
+
+    @keyframes fadeInAndOutMoon {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    }
   </style>
 </head>
 <body>
   <div class="starfield">
     <div class="stars small"></div>
   </div>
+
+  <!-- Centered Moon -->
+  <div id="moon-icon">🌕</div>
 
   <header>
     <h1>NefariousAC Minecraft Solutions</h1>

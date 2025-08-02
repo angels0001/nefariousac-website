@@ -157,33 +157,6 @@ nav button:hover {
 #community-btn:hover {
   background: linear-gradient(135deg, #059669, #34d399);
 }
-
-/* Main content area */
-main {
-  padding: 100px 40px 60px; /* padding top to clear header, bottom for footer */
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  z-index: 1;
-  position: relative;
-}
-
-/* Footer */
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  color: #ccc;
-  text-align: center;
-  padding: 12px 0;
-  font-size: 0.9rem;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.7);
-  user-select: none;
-  z-index: 10;
-
-}
 }
 
 /* Meteor Client button */
@@ -221,3 +194,31 @@ footer {
   background: linear-gradient(135deg, #6a3db9, #3b5cca);
   box-shadow: 0 0 20px rgba(106, 61, 185, 0.9);
 }
+/* Main content area */
+main {
+  padding: 100px 40px 60px; /* padding top to clear header, bottom for footer */
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+/* Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ccc;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.7);
+  user-select: none;
+  z-index: 10;
+
+}
+
+

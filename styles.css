@@ -157,7 +157,7 @@ nav button:hover {
 #community-btn:hover {
   background: linear-gradient(135deg, #059669, #34d399);
 }
-}
+
 
 /* Meteor Client button */
 #meteor-client-btn {
@@ -220,5 +220,6 @@ footer {
   z-index: 10;
 
 }
+
 
 
